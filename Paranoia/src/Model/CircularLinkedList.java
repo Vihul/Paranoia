@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 import java.util.ArrayList;
 
 public class CircularLinkedList<Player> {
@@ -6,11 +6,13 @@ public class CircularLinkedList<Player> {
 	private Player head;
 	private Player tail;
 	private ArrayList<Player> listOfTheFallen = null;
+	private int numberOfPlayers;
 	private static int daysSinceLastCullingOfTheHerd = 0;
 	
 	public CircularLinkedList() {
 		head = null;
 		head.target = tail;
+		numberOfPlayers = 0;
 	}
 	
 	public void addAll(ArrayList<Player> playerList) {
@@ -33,6 +35,8 @@ public class CircularLinkedList<Player> {
 			curr.target = newPlayer;
 			newPlayer.target = head;
 			newPlayer.predator = curr;
+			
+			numberOfPlayers++;
 		}
 	}
 	
@@ -43,20 +47,61 @@ public class CircularLinkedList<Player> {
 		}
 	}
 	
-	public void cullTheHerd() {
+	private void cullTheHerd() {
 		Player curr = head;
 		
 		while(curr.target != head) {
 			if(curr.isSafeForTheWeek) {
-				
+				curr = curr.target;
+			}
+			else {
+				listOfTheFallen.add(curr);
+				curr.predator.target = curr.target;
+				curr.target.predator = curr.predator;
 			}
 		}
+		
+		listOfTheFallen.add(curr);
+		curr.predator.target = curr.target;
+		curr.target.predator = curr.predator;
+		
+	}
+	
+	public Player findCurrentLeader() {
+		Player curr = head;
+		Player winnerWinnerOstrichDinner = curr;
+		
+		while(curr.target != head) {
+			if(curr.getPoints() > winnerWinnerOstrichDinner.getPoints()) {
+				winnerWinnerOstrichDinner = curr;
+			}
+			
+			curr = curr.target;
+		}
+		return winnerWinnerOstrichDinner;
+	}
+	
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
+	}
+	
+	
+	
+	
+	
+	
+	public void removePlayer(Player dying) {
+		Player killer = dying.predator;
+		Player newTarget = dying.target;
+		
+		killer.target = newTarget;
 	}
 	
 	public class Player {
 		private String name;
 		private Player target;
 		private Player predator;
+		private String magicWord;
 		private int points;
 		private boolean isSafeForTheWeek;
 		
@@ -81,6 +126,10 @@ public class CircularLinkedList<Player> {
 		
 		public String getName() {
 			return name;
+		}
+		
+		public String getMagicWord() {
+			return magicWord;
 		}
 	}
 }

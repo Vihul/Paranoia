@@ -6,6 +6,8 @@ public class CircularLinkedList<Player> {
 	private Player head;
 	private Player tail;
 	private ArrayList<Player> listOfTheFallen = null;
+	private ArrayList<Player> listOfTotalPlayers;
+	private ArrayList<String> magicWordList;
 	private int numberOfPlayers;
 	private static int daysSinceLastCullingOfTheHerd = 0;
 	
@@ -15,12 +17,16 @@ public class CircularLinkedList<Player> {
 		numberOfPlayers = 0;
 	}
 	
-	public void addAll(ArrayList<Player> playerList) {
+	public void addAll(ArrayList<Player> playerList, ArrayList<String> magicWords) {
+		listOfTotalPlayers = playerList;
+		magicWordList = magicWords;
+		
 		Player curr = head;
 		
 		for(int i = 0; i < playerList.size(); i++) {
 		
 			Player newPlayer = playerList.get(i);
+			newPlayer.setMagicWord(magicWordList.remove(0));
 			
 			if(head == null) {
 				head = newPlayer;
@@ -56,6 +62,7 @@ public class CircularLinkedList<Player> {
 			}
 			else {
 				listOfTheFallen.add(curr);
+				curr.predator.setMagicWord(magicWordList.remove(0));
 				curr.predator.target = curr.target;
 				curr.target.predator = curr.predator;
 			}
@@ -85,10 +92,19 @@ public class CircularLinkedList<Player> {
 		return numberOfPlayers;
 	}
 	
-	
-	
-	
-	
+	public Player findPlayer(String playerName) {
+		Player curr = head.target;
+		
+		while (!curr.equals(head)) {
+			if (curr.name.compareTo(playerName) == 0) {
+				return curr;
+			}
+			
+			curr = curr.target;
+		}
+		
+		return null;
+	}
 	
 	public void removePlayer(Player dying) {
 		Player killer = dying.predator;
@@ -97,6 +113,22 @@ public class CircularLinkedList<Player> {
 		killer.target = newTarget;
 	}
 	
+	public String findWordOfPlayer(String playerName) {
+		if(findPlayer(playerName) != null) {
+			return findPlayer(playerName).getMagicWord();
+		}
+		else {return null;}
+	}
+
+	public void printList() {
+		Player curr = head;
+		
+		while (curr != head) {
+			System.out.println("Player name: " + curr.name);
+		}
+	}
+	
+	//beginning of Player class
 	public class Player {
 		private String name;
 		private Player target;
@@ -106,10 +138,8 @@ public class CircularLinkedList<Player> {
 		private boolean isSafeForTheWeek;
 		
 		
-		public Player(String playerName, Player playerTarget, Player playerPredator) {
+		public Player(String playerName) {
 			name = playerName;
-			target = playerTarget;
-			predator = playerPredator;
 			points = 0;
 			isSafeForTheWeek = false;
 		}
@@ -130,6 +160,10 @@ public class CircularLinkedList<Player> {
 		
 		public String getMagicWord() {
 			return magicWord;
+		}
+		
+		public void setMagicWord(String newMagicWord) {
+			magicWord = newMagicWord;
 		}
 	}
 }

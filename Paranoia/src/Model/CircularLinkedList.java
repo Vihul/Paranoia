@@ -132,7 +132,7 @@ public class CircularLinkedList {
 		
 		do {
 			System.out.println("Player name: " + curr.name + ", Points: " +
-					curr.points);
+					curr.points + " Target: " + curr.target);
 			curr = curr.target;
 		} while (curr != head);
 	}
@@ -153,12 +153,16 @@ public class CircularLinkedList {
 			isSafeForTheWeek = false;
 		}
 		
+		public String toString() {
+			return this.name;
+		}
+		
 		public int getPoints() {
 			return points;
 		}
 		
-		public void targetKilled(Player killed) {
-			removePlayer(killed);
+		public void targetKilled() {
+			removePlayer(this.target);
 		}
 		
 		public String getName() {

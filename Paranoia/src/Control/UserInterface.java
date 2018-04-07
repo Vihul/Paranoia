@@ -26,7 +26,7 @@ public class UserInterface {
 		}
 		
 		while(true) {
-			System.out.print("> ");
+			System.out.print(">");
 			String input = keyboard.next();
 			
 			if (input.equals("add_player")) {
@@ -44,6 +44,21 @@ public class UserInterface {
 				
 				Collections.shuffle(words);
 				playerList.addAll(players, words);
+			}
+			
+			else if (input.equals("kill_player")) {
+				Player temp = playerList.findPlayer(keyboard.next());
+				if (temp != null) {
+					playerList.removePlayer(temp);
+				}
+				else {
+					System.out.println("Invalid name");
+				}
+			}
+			
+			else if (input.equals("target_killed")) {
+				Player temp = playerList.findPlayer(keyboard.next());
+				temp.targetKilled();
 			}
 			
 			else if (input.equals("quit")) {

@@ -6,6 +6,7 @@ public class CircularLinkedList<Player> {
 	private Player head;
 	private Player tail;
 	private ArrayList<Player> listOfTheFallen = null;
+	private static int daysSinceLastCullingOfTheHerd = 0;
 	
 	public CircularLinkedList() {
 		head = null;
@@ -34,6 +35,26 @@ public class CircularLinkedList<Player> {
 			newPlayer.predator = curr;
 		}
 	}
+	
+	public void endOfDay() {
+		daysSinceLastCullingOfTheHerd++;
+		if(daysSinceLastCullingOfTheHerd >= 6) {
+			cullTheHerd();
+		}
+	}
+	
+	public void cullTheHerd() {
+		Player curr = head;
+		
+		while(curr.target != head) {
+			if(curr.isSafeForTheWeek) {
+				
+			}
+		}
+	}
+	
+	
+	
 	
 	
 	

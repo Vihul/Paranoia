@@ -1,4 +1,5 @@
 package Model;
+import Player.java;
 
 public class CircularLinkedList<Player> {
 	
@@ -8,15 +9,15 @@ public class CircularLinkedList<Player> {
 	public CircularLinkedList() {
 		head = null;
 		tail = null;
-		head.getTarget() = tail;
+		head.setTarget(tail);
 	}
 	
 	public CircularLinkedList<Player> add(Player element) {
-		Node newNode = new Node(element);
-		Node curr = head;
+		Player newNode = new Player(element);
+		Player curr = head;
 		
 		if(head == null) {
-			head = newNode;
+			head = newPlayer;
 			head.next = tail;
 			tail.next = head;
 			head.prev = tail;

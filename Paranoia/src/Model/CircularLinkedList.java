@@ -53,11 +53,6 @@ public class CircularLinkedList<Player> {
 		}
 	}
 	
-	
-	
-	
-	
-	
 	public class Player {
 		private String name;
 		private Player target;

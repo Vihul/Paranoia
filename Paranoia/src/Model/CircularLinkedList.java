@@ -85,10 +85,19 @@ public class CircularLinkedList<Player> {
 		return numberOfPlayers;
 	}
 	
-	
-	
-	
-	
+	public Player findPlayer(String playerName) {
+		Player curr = head.target;
+		
+		while (curr != head) {
+			if (curr.name.compareTo(playerName) == 0) {
+				return curr;
+			}
+			
+			curr = curr.target;
+		}
+		
+		return null;
+	}
 	
 	public void removePlayer(Player dying) {
 		Player killer = dying.predator;

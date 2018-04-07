@@ -106,6 +106,15 @@ public class CircularLinkedList<Player> {
 		killer.target = newTarget;
 	}
 	
+	public void printList() {
+		Player curr = head;
+		
+		while (curr != head) {
+			System.out.println("Player name: " + curr.name);
+		}
+	}
+	
+	//beginning of Player class
 	public class Player {
 		private String name;
 		private Player target;

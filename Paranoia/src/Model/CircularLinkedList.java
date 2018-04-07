@@ -1,42 +1,48 @@
 package Model;
-import Player.java;
+import java.util.ArrayList;
 
 public class CircularLinkedList<Player> {
 	
 	private Player head;
 	private Player tail;
+	private ArrayList<Player> listOfTheFallen = null;
 	
 	public CircularLinkedList() {
 		head = null;
-		tail = null;
 		head.target = tail;
 	}
 	
-	public CircularLinkedList<Player> add(Player element) {
-		Player newPlayer = element;
+	public void addAll(ArrayList<Player> playerList) {
 		Player curr = head;
 		
-		if(head == null) {
-			head = newPlayer;
-			head.next = tail;
-			tail.next = head;
-			head.prev = tail;
-			tail.prev = head; 
-			tail = head;
-			
-			return this;
-		}
+		for(int i = 0; i < playerList.size(); i++) {
 		
-		while(curr.getTarget() != head){
+			Player newPlayer = playerList.get(i);
 			
+			if(head == null) {
+				head = newPlayer;
+				head.target = head;
+				head.predator = head;
+			}
+		
+			while(curr.target != head){
+				curr = curr.target;
+			}
+			
+			curr.target = newPlayer;
+			newPlayer.target = head;
+			newPlayer.predator = curr;
 		}
 	}
+	
+	
 	
 	public class Player {
 		private String name;
 		private Player target;
 		private Player predator;
 		private int points;
+		private boolean isSafeForTheWeek;
 		
 		
 		public Player(String playerName, Player playerTarget, Player playerPredator) {
@@ -44,6 +50,7 @@ public class CircularLinkedList<Player> {
 			target = playerTarget;
 			predator = playerPredator;
 			points = 0;
+			isSafeForTheWeek = false;
 		}
 		
 		public int getPoints() {
@@ -53,6 +60,7 @@ public class CircularLinkedList<Player> {
 		public void targetKilled(Player newTarget) {
 			points++;
 			target = newTarget;
+			isSafeForTheWeek = true;
 		}
 		
 		public String getName() {

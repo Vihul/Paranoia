@@ -53,7 +53,7 @@ public class CircularLinkedList {
 		}
 	}
 	
-	//TODO: find out how to do time in java
+	//TODO: find out how to do time in java, serializable
 	
 	private void cullTheHerd() {
 		Player curr = head;

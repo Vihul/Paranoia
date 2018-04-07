@@ -14,7 +14,7 @@ public class CircularLinkedList {
 		head = null;
 		numberOfPlayers = 0;
 	}
-	
+
 	public void addAll(ArrayList<Player> playerList, ArrayList<String> magicWords) {
 		magicWordList = magicWords;
 		

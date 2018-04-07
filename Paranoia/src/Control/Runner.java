@@ -12,11 +12,11 @@ public class Runner {
 		ArrayList<String> words = new ArrayList<>();
 		
 		Player Clark = playerList.new Player("Clark");
-		Player Cory= playerList.new Player("Cory");
+		Player Corey = playerList.new Player("Corey");
 		Player Michael = playerList.new Player("Michael");
 		
 		players.add(Clark);
-		players.add(Cory);
+		players.add(Corey);
 		players.add(Michael);
 		
 		words.add("Pizza");

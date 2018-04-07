@@ -16,7 +16,7 @@ public class CircularLinkedList<Player> {
 		head.target = tail;
 		numberOfPlayers = 0;
 	}
-	
+
 	public void addAll(ArrayList<Player> playerList, ArrayList<String> magicWords) {
 		listOfTotalPlayers = playerList;
 		magicWordList = magicWords;
@@ -92,8 +92,6 @@ public class CircularLinkedList<Player> {
 		return numberOfPlayers;
 	}
 	
-<<<<<<< HEAD
-=======
 	public Player findPlayer(String playerName) {
 		Player curr = head.target;
 		
@@ -108,7 +106,6 @@ public class CircularLinkedList<Player> {
 		return null;
 	}
 	
->>>>>>> branch 'master' of https://github.com/Vihul/Paranoia.git
 	public void removePlayer(Player dying) {
 		Player killer = dying.predator;
 		Player newTarget = dying.target;
@@ -116,7 +113,6 @@ public class CircularLinkedList<Player> {
 		killer.target = newTarget;
 	}
 	
-<<<<<<< HEAD
 	public Player find(String playerName) {
 		Player curr = head;
 		
@@ -139,7 +135,6 @@ public class CircularLinkedList<Player> {
 		else {return null;}
 	}
 	
-=======
 	public void printList() {
 		Player curr = head;
 		
@@ -149,7 +144,6 @@ public class CircularLinkedList<Player> {
 	}
 	
 	//beginning of Player class
->>>>>>> branch 'master' of https://github.com/Vihul/Paranoia.git
 	public class Player {
 		private String name;
 		private Player target;

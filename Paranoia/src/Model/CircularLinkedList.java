@@ -1,4 +1,4 @@
-package Model;
+package src.Model;
 import java.util.ArrayList;
 
 public class CircularLinkedList<Player> {
@@ -90,6 +90,12 @@ public class CircularLinkedList<Player> {
 	
 	
 	
+	public void removePlayer(Player dying) {
+		Player killer = dying.predator;
+		Player newTarget = dying.target;
+		
+		killer.target = newTarget;
+	}
 	
 	public class Player {
 		private String name;

@@ -1,9 +1,11 @@
-package Control;
+package src.Control;
+
+import src.Model.CircularLinkedList;
 
 public class Runner {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		CircularLinkedList players = new CircularLinkedList();
 
 	}
 

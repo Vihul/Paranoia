@@ -124,10 +124,8 @@ public class CircularLinkedList<Player> {
 		private boolean isSafeForTheWeek;
 		
 		
-		public Player(String playerName, Player playerTarget, Player playerPredator) {
+		public Player(String playerName) {
 			name = playerName;
-			target = playerTarget;
-			predator = playerPredator;
 			points = 0;
 			isSafeForTheWeek = false;
 		}

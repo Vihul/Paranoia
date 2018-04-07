@@ -53,6 +53,13 @@ public class CircularLinkedList<Player> {
 		}
 	}
 	
+	public void removePlayer(Player dying) {
+		Player killer = dying.predator;
+		Player newTarget = dying.target;
+		
+		killer.target = newTarget;
+	}
+	
 	public class Player {
 		private String name;
 		private Player target;

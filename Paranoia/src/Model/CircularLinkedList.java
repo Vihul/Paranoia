@@ -42,6 +42,12 @@ public class CircularLinkedList<Player> {
 		}
 	}
 	
+	public void eliminatePlayer(Player killer) {
+		Player elimated = killer.getTarget();
+		
+		
+	}
+	
 	
 	
 	public class Node() {

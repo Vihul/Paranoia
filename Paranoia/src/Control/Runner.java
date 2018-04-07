@@ -1,6 +1,6 @@
-package Control;
+package src.Control;
 
-import Model.CircularLinkedList;
+import src.Model.CircularLinkedList;
 
 public class Runner {
 

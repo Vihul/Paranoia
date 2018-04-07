@@ -1,11 +1,10 @@
 package src.Model;
 import java.util.ArrayList;
 
-public class CircularLinkedList<Player> {
+public class CircularLinkedList {
 	
 	private Player head;
-	private Player tail;
-	private ArrayList<Player> listOfTheFallen = null;
+	private ArrayList<Player> listOfTheFallen;
 	private ArrayList<Player> listOfTotalPlayers;
 	private ArrayList<String> magicWordList;
 	private int numberOfPlayers;
@@ -13,7 +12,6 @@ public class CircularLinkedList<Player> {
 	
 	public CircularLinkedList() {
 		head = null;
-		head.target = tail;
 		numberOfPlayers = 0;
 	}
 	
@@ -34,15 +32,18 @@ public class CircularLinkedList<Player> {
 				head.predator = head;
 			}
 		
-			while(curr.target != head){
-				curr = curr.target;
+			else {
+				while(curr.target != head){
+					curr = curr.target;
+				}
+				curr.target = newPlayer;
+				newPlayer.predator = curr;
 			}
 			
-			curr.target = newPlayer;
 			newPlayer.target = head;
-			newPlayer.predator = curr;
 			
 			numberOfPlayers++;
+			curr = head;
 		}
 	}
 	
@@ -123,9 +124,10 @@ public class CircularLinkedList<Player> {
 	public void printList() {
 		Player curr = head;
 		
-		while (curr != head) {
+		do {
 			System.out.println("Player name: " + curr.name);
-		}
+			curr = curr.target;
+		} while (curr != head);
 	}
 	
 	//beginning of Player class

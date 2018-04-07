@@ -1,22 +1,23 @@
 package Model;
+import Player.java;
 
 public class CircularLinkedList<Player> {
 	
-	private Node head;
-	private Node tail;
+	private Player head;
+	private Player tail;
 	
 	public CircularLinkedList() {
 		head = null;
 		tail = null;
-		head.next = tail;
+		head.setTarget(tail);
 	}
 	
 	public CircularLinkedList<Player> add(Player element) {
-		Node newNode = new Node(element);
-		Node curr = head;
+		Player newNode = new Player(element);
+		Player curr = head;
 		
 		if(head == null) {
-			head = newNode;
+			head = newPlayer;
 			head.next = tail;
 			tail.next = head;
 			head.prev = tail;
@@ -26,26 +27,9 @@ public class CircularLinkedList<Player> {
 			return this;
 		}
 		
-		if(head.next == null) {
-			head.next = newNode;
-			tail = newNode;
-			tail.prev = head;
-			tail.next = head;
-			head.prev = tail;
-			head.next = tail;
-			
-			return this;
-		}
-		
 		while(curr.next != head){
 			
 		}
-	}
-	
-	public void eliminatePlayer(Player killer) {
-		Player elimated = killer.getTarget();
-		
-		
 	}
 	
 	
@@ -63,5 +47,3 @@ public class CircularLinkedList<Player> {
 			prev = null;
 		}
 	}
-	
-}

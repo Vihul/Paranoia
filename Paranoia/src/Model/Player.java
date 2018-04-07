@@ -31,8 +31,18 @@ public class Player {
 		return target;
 	}
 	
+	public Player setTarget(Player newTarget) {
+		target = newTarget;
+		return this;
+	}
+	
 	public Player getPredator() {
 		return predator;
+	}
+	
+	public Player setPredator(Player newPredator) {
+		predator = newPredator;
+		return this;
 	}
 	
 }

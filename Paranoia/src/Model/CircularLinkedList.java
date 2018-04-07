@@ -5,7 +5,7 @@ public class CircularLinkedList {
 	
 	private Player head;
 	private ArrayList<Player> listOfTheFallen;
-	private ArrayList<Player> listOfTotalPlayers;
+	//private ArrayList<Player> listOfTotalPlayers;
 	private ArrayList<String> magicWordList;
 	private int numberOfPlayers;
 	private static int daysSinceLastCullingOfTheHerd = 0;
@@ -16,7 +16,6 @@ public class CircularLinkedList {
 	}
 	
 	public void addAll(ArrayList<Player> playerList, ArrayList<String> magicWords) {
-		listOfTotalPlayers = playerList;
 		magicWordList = magicWords;
 		
 		Player curr = head;
@@ -53,6 +52,8 @@ public class CircularLinkedList {
 			cullTheHerd();
 		}
 	}
+	
+	//TODO: find out how to do time in java
 	
 	private void cullTheHerd() {
 		Player curr = head;
@@ -130,7 +131,8 @@ public class CircularLinkedList {
 		Player curr = head;
 		
 		do {
-			System.out.println("Player name: " + curr.name);
+			System.out.println("Player name: " + curr.name + ", Points: " +
+					curr.points);
 			curr = curr.target;
 		} while (curr != head);
 	}

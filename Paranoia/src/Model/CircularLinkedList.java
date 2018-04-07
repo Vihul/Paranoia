@@ -1,24 +1,21 @@
 package src.Model;
 import java.util.ArrayList;
 
-public class CircularLinkedList<Player> {
+public class CircularLinkedList {
 	
 	private Player head;
-	private Player tail;
-	private ArrayList<Player> listOfTheFallen = null;
-	private ArrayList<Player> listOfTotalPlayers;
+	private ArrayList<Player> listOfTheFallen;
+	//private ArrayList<Player> listOfTotalPlayers;
 	private ArrayList<String> magicWordList;
 	private int numberOfPlayers;
 	private static int daysSinceLastCullingOfTheHerd = 0;
 	
 	public CircularLinkedList() {
 		head = null;
-		head.target = tail;
 		numberOfPlayers = 0;
 	}
 
 	public void addAll(ArrayList<Player> playerList, ArrayList<String> magicWords) {
-		listOfTotalPlayers = playerList;
 		magicWordList = magicWords;
 		
 		Player curr = head;
@@ -34,15 +31,18 @@ public class CircularLinkedList<Player> {
 				head.predator = head;
 			}
 		
-			while(curr.target != head){
-				curr = curr.target;
+			else {
+				while(curr.target != head){
+					curr = curr.target;
+				}
+				curr.target = newPlayer;
+				newPlayer.predator = curr;
 			}
 			
-			curr.target = newPlayer;
 			newPlayer.target = head;
-			newPlayer.predator = curr;
 			
 			numberOfPlayers++;
+			curr = head;
 		}
 	}
 	
@@ -52,6 +52,8 @@ public class CircularLinkedList<Player> {
 			cullTheHerd();
 		}
 	}
+	
+	//TODO: find out how to do time in java
 	
 	private void cullTheHerd() {
 		Player curr = head;
@@ -95,7 +97,7 @@ public class CircularLinkedList<Player> {
 	public Player findPlayer(String playerName) {
 		Player curr = head.target;
 		
-		while (curr != head) {
+		while (!curr.equals(head)) {
 			if (curr.name.compareTo(playerName) == 0) {
 				return curr;
 			}
@@ -110,37 +112,29 @@ public class CircularLinkedList<Player> {
 		Player killer = dying.predator;
 		Player newTarget = dying.target;
 		
+		killer.isSafeForTheWeek = true;
+		killer.points++;
+		
 		killer.target = newTarget;
 	}
 	
-	public Player find(String playerName) {
-		Player curr = head;
-		
-		while(curr.target != head) {
-			if(curr.getName().equals(playerName)) {
-				return curr;
-			}
-			curr = curr.target;
-		}
-		if(curr.getName().equals(playerName)) {
-			return curr;
-		}
-		return null;
-	}
-	
 	public String findWordOfPlayer(String playerName) {
-		if(find(playerName) != null) {
-			return find(playerName).getMagicWord();
+		if(findPlayer(playerName) != null) {
+			return findPlayer(playerName).getMagicWord();
 		}
-		else {return null;}
+		else {
+			return null;
+		}
 	}
-	
+
 	public void printList() {
 		Player curr = head;
 		
-		while (curr != head) {
-			System.out.println("Player name: " + curr.name);
-		}
+		do {
+			System.out.println("Player name: " + curr.name + ", Points: " +
+					curr.points);
+			curr = curr.target;
+		} while (curr != head);
 	}
 	
 	//beginning of Player class
@@ -163,10 +157,8 @@ public class CircularLinkedList<Player> {
 			return points;
 		}
 		
-		public void targetKilled(Player newTarget) {
-			points++;
-			target = newTarget;
-			isSafeForTheWeek = true;
+		public void targetKilled(Player killed) {
+			removePlayer(killed);
 		}
 		
 		public String getName() {

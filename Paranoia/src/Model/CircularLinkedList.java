@@ -111,6 +111,9 @@ public class CircularLinkedList {
 		Player killer = dying.predator;
 		Player newTarget = dying.target;
 		
+		killer.isSafeForTheWeek = true;
+		killer.points++;
+		
 		killer.target = newTarget;
 	}
 	
@@ -118,7 +121,9 @@ public class CircularLinkedList {
 		if(findPlayer(playerName) != null) {
 			return findPlayer(playerName).getMagicWord();
 		}
-		else {return null;}
+		else {
+			return null;
+		}
 	}
 
 	public void printList() {
@@ -150,10 +155,8 @@ public class CircularLinkedList {
 			return points;
 		}
 		
-		public void targetKilled(Player newTarget) {
-			points++;
-			target = newTarget;
-			isSafeForTheWeek = true;
+		public void targetKilled(Player killed) {
+			removePlayer(killed);
 		}
 		
 		public String getName() {

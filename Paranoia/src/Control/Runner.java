@@ -26,6 +26,12 @@ public class Runner {
 		playerList.addAll(players, words);
 		
 		playerList.printList();
+		
+		System.out.println("Deleting Michael");
+		
+		playerList.removePlayer(Michael);
+		
+		playerList.printList();
 	}
 
 }

@@ -1,11 +1,17 @@
 package src.Model;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CircularLinkedList {
+public class CircularLinkedList implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Player head;
 	private ArrayList<Player> listOfTheFallen;
-	//private ArrayList<Player> listOfTotalPlayers;
 	private ArrayList<String> magicWordList;
 	private int numberOfPlayers;
 	private static int daysSinceLastCullingOfTheHerd = 0;
@@ -53,7 +59,7 @@ public class CircularLinkedList {
 		}
 	}
 	
-	//TODO: find out how to do time in java, serializable
+	//TODO: find out how to do time in java
 	
 	private void cullTheHerd() {
 		Player curr = head;
@@ -137,8 +143,36 @@ public class CircularLinkedList {
 		} while (curr != head);
 	}
 	
+	public void saveList(String fileName) {
+		File file = new File(fileName);
+		try {
+			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+	
+			output.writeObject(this);
+			output.close();
+		}
+		catch (Exception e) {
+			System.out.println("File could not be saved");
+		}
+	}
+	
+	public CircularLinkedList loadList(String fileName) {
+		File file = new File(fileName);
+
+		try {
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(file));
+			CircularLinkedList list =  (CircularLinkedList) input.readObject();
+			input.close();
+			return list;
+		}
+		catch (Exception E) {
+			return new CircularLinkedList();
+		}
+	}
+	
 	//beginning of Player class
-	public class Player {
+	public class Player implements Serializable {
+		private static final long serialVersionUID = 1L;
 		private String name;
 		private Player target;
 		private Player predator;

@@ -61,6 +61,16 @@ public class UserInterface {
 				temp.targetKilled();
 			}
 			
+			else if (input.equals("save_game")) {
+				String name = keyboard.next();
+				playerList.saveList(name);
+			}
+			
+			else if (input.equals("load_game")) {
+				String name = keyboard.next();
+				playerList.loadList(name);
+			}
+			
 			else if (input.equals("quit")) {
 				break;
 			}

@@ -48,6 +48,12 @@ public class Runner {
 		
 		playerList.printList();
 		
+		System.out.println("Deleting Corey");
+		
+		playerList.removePlayer(Corey);
+		
+		playerList.printList();
+		
 		fileScan.close();
 	}
 

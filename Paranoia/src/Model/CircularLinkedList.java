@@ -101,15 +101,15 @@ public class CircularLinkedList implements Serializable{
 	}
 	
 	public Player findPlayer(String playerName) {
-		Player curr = head.target;
+		Player curr = head;
 		
-		while (!curr.equals(head)) {
+		do {
 			if (curr.name.compareTo(playerName) == 0) {
 				return curr;
 			}
 			
 			curr = curr.target;
-		}
+		} while (!curr.equals(head));
 		
 		return null;
 	}
@@ -122,6 +122,9 @@ public class CircularLinkedList implements Serializable{
 		killer.points++;
 		
 		killer.target = newTarget;
+		if (killer.target == killer) {
+			System.out.println("" + killer + " has won the game!");
+		}
 	}
 	
 	public String findWordOfPlayer(String playerName) {
@@ -138,7 +141,8 @@ public class CircularLinkedList implements Serializable{
 		
 		do {
 			System.out.println("Player name: " + curr.name + ", Points: " +
-					curr.points + " Target: " + curr.target);
+					curr.points + " Target: " + curr.target + " Word: " + 
+					curr.magicWord);
 			curr = curr.target;
 		} while (curr != head);
 	}
